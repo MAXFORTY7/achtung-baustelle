@@ -1,4 +1,6 @@
 # Baustellen-Sicherheits-Trainer
+
+![Gameplay](gp_screenshot.png)
  
 Kleines Mini-Game, das ich als Übungsprojekt für meine Bewerbung als
 Werkstudent entwickelt habe. Man muss auf einer Baustelle innerhalb von
