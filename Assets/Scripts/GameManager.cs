@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        // Collect every hazard in the scene so we don't have to assign them by hand.
         hazards.AddRange(FindObjectsByType<Hazard>());
         remainingTime = timeLimit;
         popupPanel.SetActive(false);
@@ -87,9 +88,11 @@ public class GameManager : MonoBehaviour
 
         if (Camera.main != null)
         {
+            // Shoot a ray from the mouse position into the scene and see what we hit.
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit, 500f))
             {
+                // GetComponentInParent so the collider can sit on a child mesh.
                 Hazard hazard = hit.collider.GetComponentInParent<Hazard>();
                 if (hazard != null && !hazard.IsFound)
                 {
@@ -125,6 +128,7 @@ public class GameManager : MonoBehaviour
     {
         popupPanel.SetActive(false);
 
+        // Last hazard found -> add the time bonus and win.
         if (foundCount >= hazards.Count)
         {
             score += Mathf.RoundToInt(remainingTime) * timeBonusPerSecond;
@@ -149,13 +153,13 @@ public class GameManager : MonoBehaviour
 
         endSummaryText.text =
             "Gefundene Risiken: " + foundCount + " / " + hazards.Count +
-            "\nPunkte: " + score;
+            "\nPunkte + Zeitbonus: " + score;
     }
 
     private void ShowFeedback(string message)
     {
         feedbackText.text = message;
-        feedbackTimer = 2f;
+        feedbackTimer = 2f; // seconds until the message clears
     }
 
     private void UpdateHud()

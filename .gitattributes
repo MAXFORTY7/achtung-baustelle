@@ -169,3 +169,20 @@ Packages/packages-lock.json linguist-generated
 
 # Exceptions for .asset files such as lightning pre-baking
 LightingData.asset     binary
+
+# --- GitHub language stats: hide Unity-generated shaders/assets ---
+# Treat shader files as vendored so C# shows up as the main language
+*.shader linguist-vendored
+*.cginc linguist-vendored
+*.hlsl linguist-vendored
+*.compute linguist-vendored
+
+# Unity asset/meta files are not "code"
+*.asset linguist-generated
+*.meta linguist-generated
+*.mat linguist-generated
+*.unity linguist-generated
+*.prefab linguist-generated
+
+# Make sure C# always counts
+*.cs linguist-language=C#
